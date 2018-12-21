@@ -11,7 +11,6 @@ import (
 	"strings"
 	"syscall"
 	"time"
-	"strings"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/muyouming/gphotosuploader/api"

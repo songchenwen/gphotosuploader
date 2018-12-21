@@ -11,6 +11,7 @@ import (
 	"strings"
 	"syscall"
 	"time"
+	"strings"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/simonedegiacomi/gphotosuploader/api"
@@ -220,7 +221,7 @@ func handleUploaderEvents(exiting chan bool) {
 func startToWatch(filePath string, fsWatcher *fsnotify.Watcher) error {
 	if watchRecursively {
 		return filepath.Walk(filePath, func(path string, file os.FileInfo, err error) error {
-			if file.IsDir() {
+			if (file.IsDir()) && (strings.Contains(file.name(),"@eaDir")) {
 				return fsWatcher.Add(path)
 			}
 			return nil

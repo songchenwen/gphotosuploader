@@ -14,10 +14,10 @@ import (
 	"strings"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/simonedegiacomi/gphotosuploader/api"
-	"github.com/simonedegiacomi/gphotosuploader/auth"
-	"github.com/simonedegiacomi/gphotosuploader/utils"
-	"github.com/simonedegiacomi/gphotosuploader/version"
+	"github.com/muyouming/gphotosuploader/api"
+	"github.com/muyouming/gphotosuploader/auth"
+	"github.com/muyouming/gphotosuploader/utils"
+	"github.com/muyouming/gphotosuploader/version"
 )
 
 var (

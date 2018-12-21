@@ -13,6 +13,6 @@ gphotosuploader_.
 This extension is released in public domain, see UNLICENSE_.
 
 .. _Google Photos: https://photos.google.com/
-.. _gphotosuploader: https://github.com/simonedegiacomi/gphotosuploader
+.. _gphotosuploader: https://github.com/muyouming/gphotosuploader
 .. _Developer mode: https://developer.chrome.com/extensions/getstarted#manifest
 .. _UNLICENSE: https://unlicense.org/

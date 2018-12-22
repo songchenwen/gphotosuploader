@@ -220,7 +220,7 @@ func handleUploaderEvents(exiting chan bool) {
 func startToWatch(filePath string, fsWatcher *fsnotify.Watcher) error {
 	if watchRecursively {
 		return filepath.Walk(filePath, func(path string, file os.FileInfo, err error) error {
-			if (file.IsDir()) && (strings.Contains(file.Name(),"@eaDir")) {
+			if (file.IsDir()) && (!strings.Contains(file.Name(),"@eaDir")) {
 				return fsWatcher.Add(path)
 			}
 			return nil

@@ -248,7 +248,7 @@ func handleFileChange(event fsnotify.Event, fsWatcher *fsnotify.Watcher) {
 
 			if info, err := os.Stat(event.Name); err != nil {
 				log.Println(err)
-			} else if !info.IsDir() {
+			} else if !info.IsDir()  && (!strings.Contains(event.Name,"@eaDir")) {
 
 				// Upload file
 				uploader.EnqueueUpload(event.Name)

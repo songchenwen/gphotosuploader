@@ -178,7 +178,7 @@ func initAuthentication() auth.CookieCredentials {
 func uploadArgumentsFiles() {
 	for _, name := range filesToUpload {
 		filepath.Walk(name, func(path string, file os.FileInfo, err error) error {
-			if !file.IsDir() {
+			if (!file.IsDir()) && (!strings.Contains(path,"@eaDir")) {
 				uploader.EnqueueUpload(path)
 			}
 

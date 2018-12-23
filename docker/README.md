@@ -7,7 +7,8 @@ Features:
   - monitoring all changes
   - support socks5 proxy
 
-- Architecture：
+# Architecture：
+
    ![Architecture](images/Architecture.jpg)
 
 How to Install:
@@ -24,7 +25,6 @@ How to Install:
 
   6. if this folder is new, you can go to the terminal and start a bash ,then execute:
       gphotosuploader --upload /photo --maxConcurrenct 4
-
-    ![step5](images/step5.png)
-    this comamnd will upload all your photos and videos in /photo .
+     this comamnd will upload all your photos and videos in /photo .
+      ![step5](images/step5.png)
   7. enjoy.

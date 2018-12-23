@@ -11,8 +11,7 @@ Features:
 How to Install:
   1. docker pull muyouming/gphotosuploader
   2. get google cookie by using chrome extension
-      ##### Authentication using a Chrome extension
-      You can also get the authentication file using a Chrome extension. You can read more about it [here](https://github.com/muyouming/gphotosuploader/tree/master/crx-auth).
+      ##### Authentication using a Chrome extension [here](https://github.com/muyouming/gphotosuploader/tree/master/crx-auth).
   3. run docker in privillage mode, and set the photo folder to /photo.
   4. input the cookie string in docker env COOKIES
   4. if  proxy needed ,please change the SOCKS5_PROXY to your proxy, if no proxy needed ,pease delete the http_proxy and https_proxy.

@@ -1,6 +1,5 @@
 Google Photo uploader Docker for Synology
 
-[中文版](README_CN.md)
 
 Features:
   - ignore Synology thumb "@eaDir" folders

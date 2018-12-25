@@ -2,6 +2,7 @@ Google Photo uploader Docker for Synology
 
 
 Features:
+  - unlimited storage with high resolution photos/videos upload
   - ignore Synology thumb "@eaDir" folders
   - monitoring all changes
   - support socks5 proxy

@@ -6,4 +6,4 @@ echo "proxy = socks5://${SOCKS5_PROXY}" >> ~/.cow/rc
 echo "${COOKIES}" >> /go/src/app/auth.json
 echo "Run gphotosUploader"
 /bin/bash -c "nohup ./cow & "
-/bin/bash -c "sleep 4; /go/bin/gphotosuploader --upload /photo --maxConcurrent 4 --watch /photo --maxConcurrent 4" 
+/bin/bash -c "sleep 4; /go/bin/gphotosuploader --watch /photo --maxConcurrent 4" 

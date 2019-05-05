@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/muyouming/gphotosuploader/auth"
+	"github.com/songchenwen/gphotosuploader/auth"
 	"github.com/tebeka/selenium"
 )
 

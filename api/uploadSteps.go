@@ -236,15 +236,15 @@ func (u *Upload) enablePhoto(uploadTokenBase64 string) (enabledUrl string, err e
 
 	innerJsonRes, err := jsonparser.GetString(jsonRes, "[0]", "[2]")
 	if err != nil {
-		return "", unexpectedResponse(jsonRes)
+		return "", unexpectedResponse(string(jsonRes))
 	}
 	eUrl, err := jsonparser.GetString([]byte(innerJsonRes), "[0]", "[0]", "[1]", "[1]", "[0]")
 	if err != nil {
-		return "", unexpectedResponse(jsonRes)
+		return "", unexpectedResponse(string(jsonRes))
 	}
 	u.idToMoveIntoAlbum, err = jsonparser.GetString([]byte(innerJsonRes), "[0]", "[0]", "[1]", "[0]")
 	if err != nil {
-		return "", unexpectedResponse(jsonRes)
+		return "", unexpectedResponse(string(jsonRes))
 	}
 
 	if err != nil {
@@ -372,12 +372,12 @@ func (u *Upload) createAlbum(albumName string) (string, error) {
 
 	innerJsonRes, err := jsonparser.GetString(jsonRes, "[0]", "[2]")
 	if err != nil {
-		return "", unexpectedResponse(jsonRes)
+		return "", unexpectedResponse(string(jsonRes))
 	}
 
 	albumId, err := jsonparser.GetString([]byte(innerJsonRes), "[0]", "[0]")
 	if err != nil {
-		return "", unexpectedResponse(jsonRes)
+		return "", unexpectedResponse(string(jsonRes))
 	}
 
 	return albumId, nil

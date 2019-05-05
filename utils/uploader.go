@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/muyouming/gphotosuploader/api"
-	"github.com/muyouming/gphotosuploader/auth"
+	"github.com/songchenwen/gphotosuploader/api"
+	"github.com/songchenwen/gphotosuploader/auth"
 )
 
 // Simple client used to implement the tool that can upload multiple photos or videos at once

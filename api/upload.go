@@ -13,7 +13,7 @@ import (
 
 	"log"
 
-	"github.com/muyouming/gphotosuploader/auth"
+	"github.com/songchenwen/gphotosuploader/auth"
 )
 
 var (

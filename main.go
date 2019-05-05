@@ -11,12 +11,13 @@ import (
 	"strings"
 	"syscall"
 	"time"
+	"regexp"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/muyouming/gphotosuploader/api"
-	"github.com/muyouming/gphotosuploader/auth"
-	"github.com/muyouming/gphotosuploader/utils"
-	"github.com/muyouming/gphotosuploader/version"
+	"github.com/songchenwen/gphotosuploader/api"
+	"github.com/songchenwen/gphotosuploader/auth"
+	"github.com/songchenwen/gphotosuploader/utils"
+	"github.com/songchenwen/gphotosuploader/version"
 )
 
 var (
@@ -31,6 +32,7 @@ var (
 	maxConcurrentUploads int
 	eventDelay           time.Duration
 	printVersion         bool
+	ignore               string
 
 	// Uploader
 	uploader *utils.ConcurrentUploader
@@ -40,6 +42,8 @@ var (
 	uploadedFilesCount = 0
 	ignoredCount       = 0
 	errorsCount        = 0
+
+	ignoreRegexp, _    = regexp.Compile("^$")
 )
 
 func main() {
@@ -48,7 +52,11 @@ func main() {
 		fmt.Printf("Hash:\t%s\nCommit date:\t%s\n", version.Hash, version.Date)
 		os.Exit(0)
 	}
-
+	
+	if strings.Count(ignore, "") - 1 > 0 {
+		ignoreRegexp, _ = regexp.Compile(ignore)
+	}
+	
 	credentials := initAuthentication()
 
 	var err error
@@ -110,6 +118,7 @@ func parseCliArguments() {
 	flag.StringVar(&uploadedListFile, "uploadedList", "uploaded.txt", "List to already uploaded files")
 	flag.IntVar(&maxConcurrentUploads, "maxConcurrent", 1, "Number of max concurrent uploads")
 	flag.Var(&directoriesToWatch, "watch", "Directory to watch")
+	flag.StringVar(&ignore, "ignore", "", "Ignore path regexp")
 	flag.BoolVar(&watchRecursively, "watchRecursively", true, "Start watching new directories in currently watched directories")
 	delay := flag.Int("eventDelay", 3, "Distance of time to wait to consume different events of the same file (seconds)")
 	flag.BoolVar(&printVersion, "version", false, "Print version and commit date")
@@ -178,7 +187,7 @@ func initAuthentication() auth.CookieCredentials {
 func uploadArgumentsFiles() {
 	for _, name := range filesToUpload {
 		filepath.Walk(name, func(path string, file os.FileInfo, err error) error {
-			if (!file.IsDir()) && (!strings.Contains(path,"@eaDir")) {
+			if (!file.IsDir()) && (!strings.Contains(path,"@eaDir")) && !(strings.Count(ignore, "") - 1 > 0 && ignoreRegexp.MatchString(path)) {
 				uploader.EnqueueUpload(path)
 			}
 
@@ -220,7 +229,8 @@ func handleUploaderEvents(exiting chan bool) {
 func startToWatch(filePath string, fsWatcher *fsnotify.Watcher) error {
 	if watchRecursively {
 		return filepath.Walk(filePath, func(path string, file os.FileInfo, err error) error {
-			if (file.IsDir()) && (!strings.Contains(file.Name(),"@eaDir")) {
+			if (file.IsDir()) && (!strings.Contains(file.Name(),"@eaDir")) && !(strings.Count(ignore, "") - 1 > 0 && ignoreRegexp.MatchString(path)) {
+				log.Printf("watch %v\n", path)
 				return fsWatcher.Add(path)
 			}
 			return nil

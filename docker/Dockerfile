@@ -61,7 +61,10 @@ WORKDIR $GOPATH
 
 WORKDIR /go/src/app
 
+run chown abc:abc /go/src/app
+
 env COOKIES=Please_insert_cookies
+env IGNORE=""
 
 run echo fs.inotify.max_user_watches=1048576 | tee -a /etc/sysctl.conf && sysctl -p
 
@@ -69,4 +72,9 @@ copy . .
 
 run go get github.com/songchenwen/gphotosuploader
 
-CMD ["/bin/bash","run.sh"]
+run chmod a+x run.sh
+
+RUN chown abc:abc /app
+WORKDIR /app
+
+CMD ["/go/src/app/run.sh"]

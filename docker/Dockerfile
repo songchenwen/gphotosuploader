@@ -5,8 +5,12 @@ FROM lsiobase/ubuntu:${UBUNTU_VERSION}
 
 LABEL AUTHOR=songchenwen<me@songchenwen.com>
 
+RUN apt-get update 
+
+run apt install -y --no-install-recommends curl wget git bash
+
 # gcc for cgo
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
 		g++ \
 		gcc \
 		libc6-dev \
@@ -57,8 +61,6 @@ WORKDIR $GOPATH
 # above from golang strech docker
 
 WORKDIR /go/src/app
-
-run apt install curl wget git bash
 
 env COOKIES=Please_insert_cookies
 
